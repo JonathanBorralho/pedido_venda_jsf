@@ -12,16 +12,20 @@
 <h:body>
 	
 	<div class="ui-g">
-		<div class="ui-g-8">
-				
+		<div class="ui-g-10">
+			
 			<h:form>
 				<p:panelGrid columns="2">
 					<f:facet name="header">
-						Pessoas
-						<p:commandLink value="+" ajax="false" action="#{indexBean.novaPessoa}"></p:commandLink>
+						Pessoas <a href="/PedidoVenda/index.xhtml">index</a>
 					</f:facet>
 					
-					<p:dataTable var="pessoa" value="#{indexBean.pessoas}">
+					<p:dataTable
+						var="pessoa"
+						value="#{pessoaListViewBean.lazyModel}"
+						paginator="true" rows="1" lazy="true"
+						paginatorPosition="bottom">
+
 						<p:column headerText="#">
 							#{pessoa.id}
 						</p:column>
@@ -37,6 +41,17 @@
 						<p:column headerText="CPF">
 							#{pessoa.cpf}
 						</p:column>
+						
+						<p:column headerText="Data de Nascimento">
+							<h:outputText value="#{pessoa.dataNascimento}">
+								<f:convertDateTime type="localTime" pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</p:column>
+						
+						<f:facet name="footer">
+							Mostrando #{pessoaListViewBean.lazyModel.pageSize} do total de #{pessoaListViewBean.lazyModel.rowCount} registro(s)
+						</f:facet>
+						
 					</p:dataTable>
 				</p:panelGrid>
 			</h:form>
