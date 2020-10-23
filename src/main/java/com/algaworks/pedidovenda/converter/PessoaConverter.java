@@ -1,5 +1,6 @@
 package com.algaworks.pedidovenda.converter;
 
+import static java.lang.Long.valueOf;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 import javax.enterprise.inject.spi.CDI;
@@ -25,8 +26,7 @@ public class PessoaConverter implements Converter<Pessoa> {
 		Pessoa pessoa = null;
 		
 		if (isNotBlank(value)) {
-			Long id = Long.valueOf(value);
-			pessoa = pessoaRepository.findById(id);
+			pessoa = pessoaRepository.findById(valueOf(value));
 		}
 
 		return pessoa;

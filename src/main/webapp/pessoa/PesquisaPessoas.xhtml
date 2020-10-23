@@ -3,7 +3,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sec="http://www.springframework.org/security/tags">
 	
 	<h:head>
 		<title>Listagem de Pessoas</title>
@@ -22,9 +23,15 @@
 	    			<p:commandButton value="Pesquisar" update="tblPessoa" process="@form" />
 	    			<p:commandButton value="Limpar" action="#{pesquisaPessoasBean.clearSearch}" update="@form" process="@form" />
 	    		</p:toolbarGroup>
-	    		<p:toolbarGroup align="right">
-	    			<p:button value="Novo" outcome="/pessoa/CadastroPessoas.xhtml" />
-	    		</p:toolbarGroup>
+    			<sec:authorize access="hasRole('USER')">
+   					<p:toolbarGroup align="right">
+		    			<p:button value="Novo" outcome="/pessoa/CadastroPessoas.xhtml" />
+		    			
+		    			<a class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="#{request.contextPath}/logout">
+		    				<span class="ui-button-text ui-c">Sair</span>
+		    			</a>
+   					</p:toolbarGroup>
+   				</sec:authorize>
 	    	</p:toolbar>
 	    	
 	    	
@@ -64,7 +71,7 @@
 				</p:column>
 				
 				<p:column headerText="Ações">
-					<p:button outcome="/pessoa/CadastroPessoas.xhtml" title="Editar" value="Editar">
+					<p:button outcome="/pessoa/CadastroPessoas" title="Editar" value="Editar">
 	    				<f:param name="pessoa" value="#{pessoa.id}" />
 	    			</p:button>
 	    			
