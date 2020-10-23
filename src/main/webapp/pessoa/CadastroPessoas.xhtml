@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">
+	
+	<h:head>
+		<title>Cadastro de Pessoas</title>
+	</h:head>
+	
+	
+	<h:body>
+	
+		<f:metadata>
+			<o:viewParam name="pessoa" value="#{cadastroPessoasBean.pessoa}" />
+		</f:metadata>
+		
+		<p:messages autoUpdate="true" closable="true" />
+	
+		<h:form>
+			<p:growl id="message" showDetail="true" />
+
+			<h1>Cadastro de pessoas</h1>
+			
+			<p:toolbar style="margin-top: 20px">
+	    		<p:toolbarGroup>
+	    			<p:button value="Novo" outcome="/pessoa/CadastroPessoas.xhtml" rendered="#{cadastroPessoasBean.edicao}" />
+	    		</p:toolbarGroup>
+	    		<p:toolbarGroup align="right">
+	    			<p:button value="Pesquisa" outcome="/pessoa/PesquisaPessoas.xhtml" />
+	    		</p:toolbarGroup>
+	    	</p:toolbar>
+	    	
+	    	
+    		<h:inputHidden id="id" value="#{cadastroPessoasBean.pessoa.id}" />
+	    	<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px">
+
+	    		<p:outputLabel value="Nome" for="nome"/>
+	    		<p:inputText id="nome" size="20" value="#{cadastroPessoasBean.pessoa.nome}" autocomplete="off" />
+	    		
+	    		<p:outputLabel value="CPF" for="cpf"/>
+	    		<p:inputText id="cpf" size="20" value="#{cadastroPessoasBean.pessoa.cpf}" autocomplete="off" />
+	    		
+	    		<p:outputLabel value="Data de Nascimento" for="dataNascimento"/>
+	    		<p:datePicker id="dataNascimento" value="#{cadastroPessoasBean.pessoa.dataNascimento}" autocomplete="off" />
+	    			    		
+	    		<p:outputLabel value="E-mail" for="email"/>
+	    		<p:inputText id="email" size="60" value="#{cadastroPessoasBean.pessoa.email}" autocomplete="off" />
+	    	</p:panelGrid>
+	    	
+	    	<p:toolbar style="margin-top: 20px">
+	    		<p:toolbarGroup>
+		    		<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroPessoasBean.salvar}" />
+	    		</p:toolbarGroup>
+	    	</p:toolbar>
+		
+		</h:form>	
+	</h:body>
+</html>
+
